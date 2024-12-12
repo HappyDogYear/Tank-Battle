@@ -10,14 +10,6 @@ public class TankFrame extends Frame {
 
     Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN);
 
-    int x = 200;
-    int y = 200;
-
-    // 速度
-    private static final Integer SPEED = 10;
-
-    DirectionEnums directionEnums = DirectionEnums.DOWN;
-
     public TankFrame() {
         // 大小  长和宽
         setSize(800, 600);
@@ -58,10 +50,8 @@ public class TankFrame extends Frame {
         // y += 30;
 
 
-        //
+        //画出tank
         mainTank.paint(g);
-
-
     }
 
     /**
@@ -144,6 +134,8 @@ public class TankFrame extends Frame {
          * 设置tank的方向
          */
         private void setTankDirection() {
+            mainTank.setMoving(Boolean.TRUE);
+
             if (bL) {
                 mainTank.setDirectionEnums(DirectionEnums.LEFT);
             }
@@ -155,6 +147,10 @@ public class TankFrame extends Frame {
             }
             if (bD) {
                 mainTank.setDirectionEnums(DirectionEnums.DOWN);
+            }
+
+            if(!bL && !bU && !bR && !bD) {
+                mainTank.setMoving(Boolean.FALSE);
             }
         }
     }

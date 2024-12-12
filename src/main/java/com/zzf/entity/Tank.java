@@ -1,18 +1,15 @@
 package com.zzf.entity;
 
 import com.zzf.enums.DirectionEnums;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.awt.*;
 
 /**
  * 坦克类
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@RequiredArgsConstructor
 public class Tank {
 
     // tank的位置
@@ -24,10 +21,29 @@ public class Tank {
 
     //tank的速度
     private static final int SPEED = 10;
+    //tank是否停止
+    private boolean moving = false;
+
+    public Tank(int x, int y, DirectionEnums directionEnums) {
+        this.x = x;
+        this.y = y;
+        this.directionEnums = directionEnums;
+    }
 
 
     public void paint(Graphics g) {
+        //绘制
         g.fillRect(x, y, 50, 50);
+
+        //移动
+        move();
+    }
+
+
+    private void move(){
+        if(!moving){
+            return;
+        }
 
         switch (directionEnums) {
             case LEFT:
