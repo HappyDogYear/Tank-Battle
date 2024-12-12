@@ -1,5 +1,6 @@
 package com.zzf.tank;
 
+import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
 
 import java.awt.*;
@@ -7,10 +8,12 @@ import java.awt.event.*;
 
 public class TankFrame extends Frame {
 
+    Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN);
+
     int x = 200;
     int y = 200;
 
-    //速度
+    // 速度
     private static final Integer SPEED = 10;
 
     DirectionEnums directionEnums = DirectionEnums.DOWN;
@@ -50,30 +53,14 @@ public class TankFrame extends Frame {
         // g.fillRect(200, 200, 50, 50);
 
         // 版本3 想让矩形动起来 win + d 算一次重新绘制， 可以看到效果
-        g.fillRect(x, y, 50, 50);
+        // g.fillRect(x, y, 50, 50);
         // x += 30;
         // y += 30;
 
-        switch (directionEnums) {
-            case LEFT:
-                x -= SPEED;
-                break;
 
-            case UP:
-                y -= SPEED;
-                break;
+        //
+        mainTank.paint(g);
 
-            case RIGHT:
-                x += SPEED;
-                break;
-
-            case DOWN:
-                y += SPEED;
-                break;
-
-            default:
-                break;
-        }
 
     }
 
@@ -117,7 +104,7 @@ public class TankFrame extends Frame {
                     break;
             }
 
-            //设置tank的方向
+            // 设置tank的方向
             setTankDirection();
 
         }
@@ -148,6 +135,9 @@ public class TankFrame extends Frame {
                 default:
                     break;
             }
+
+            // 设置tank的方向 我觉得加不加不影响后面的操作，到后面再验证
+            setTankDirection();
         }
 
         /**
@@ -155,16 +145,16 @@ public class TankFrame extends Frame {
          */
         private void setTankDirection() {
             if (bL) {
-                directionEnums = DirectionEnums.LEFT;
+                mainTank.setDirectionEnums(DirectionEnums.LEFT);
             }
             if (bU) {
-                directionEnums = DirectionEnums.UP;
+                mainTank.setDirectionEnums(DirectionEnums.UP);
             }
             if (bR) {
-                directionEnums = DirectionEnums.RIGHT;
+                mainTank.setDirectionEnums(DirectionEnums.RIGHT);
             }
             if (bD) {
-                directionEnums = DirectionEnums.DOWN;
+                mainTank.setDirectionEnums(DirectionEnums.DOWN);
             }
         }
     }
