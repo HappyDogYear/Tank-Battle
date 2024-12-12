@@ -43,7 +43,7 @@ public class TankFrame extends Frame {
         //版本3 想让矩形动起来 win + d 算一次重新绘制， 可以看到效果
         g.fillRect(x, y, 50, 50);
         x += 30;
-        y += 30;
+        // y += 30;
 
 
 
@@ -58,7 +58,10 @@ public class TankFrame extends Frame {
         //键盘按下调用
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("key pressed");
+            // x += 200;
+            //会默认调用 paint 方法
+            // repaint();
+
         }
 
         //键盘抬起调用

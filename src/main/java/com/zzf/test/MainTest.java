@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 
 public class MainTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // 版本1
 //        test1();
@@ -37,8 +37,13 @@ public class MainTest {
     }
 
 
-    public static void test2(){
+    public static void test2() throws InterruptedException {
         TankFrame frame = new TankFrame();
+
+        while (true){
+            Thread.sleep(50);
+            frame.repaint();
+        }
     }
 
 
