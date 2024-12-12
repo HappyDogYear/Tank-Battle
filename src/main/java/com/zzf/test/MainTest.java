@@ -1,5 +1,7 @@
 package com.zzf.test;
 
+import com.zzf.tank.TankFrame;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -7,8 +9,15 @@ import java.awt.event.WindowEvent;
 public class MainTest {
 
     public static void main(String[] args) {
-        System.out.println("tank battle start");
 
+        // 版本1
+//        test1();
+
+        //版本2
+        test2();
+    }
+
+    public static void test1(){
         Frame frame = new Frame();
         //大小  长和宽
         frame.setSize(800,600);
@@ -26,4 +35,11 @@ public class MainTest {
             }
         });
     }
+
+
+    public static void test2(){
+        TankFrame frame = new TankFrame();
+    }
+
+
 }
