@@ -1,8 +1,7 @@
 package com.zzf.tank;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 public class TankFrame extends Frame {
 
@@ -18,6 +17,10 @@ public class TankFrame extends Frame {
         setVisible(true);
         //标题
         setTitle("tank war");
+
+        //添加 键盘监听事件
+        this.addKeyListener(new MyKeyListener());
+
         //关闭窗口
         addWindowListener(new WindowAdapter() {
             @Override
@@ -38,10 +41,30 @@ public class TankFrame extends Frame {
         //g.fillRect(200, 200, 50, 50);
 
         //版本3 想让矩形动起来 win + d 算一次重新绘制， 可以看到效果
-        System.out.println("paint");
         g.fillRect(x, y, 50, 50);
         x += 30;
         y += 30;
 
+
+
+
+    }
+
+    /**
+     * 内部类
+     */
+    class MyKeyListener extends KeyAdapter {
+
+        //键盘按下调用
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("key pressed");
+        }
+
+        //键盘抬起调用
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("key released");
+        }
     }
 }
