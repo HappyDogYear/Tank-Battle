@@ -1,5 +1,7 @@
 package com.zzf.tank;
 
+import com.zzf.enums.DirectionEnums;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -7,6 +9,11 @@ public class TankFrame extends Frame {
 
     int x = 200;
     int y = 200;
+
+    //速度
+    private static final Integer SPEED = 10;
+
+    DirectionEnums directionEnums = DirectionEnums.DOWN;
 
     public TankFrame() {
         // 大小  长和宽
@@ -20,6 +27,7 @@ public class TankFrame extends Frame {
 
         // 添加 键盘监听事件
         this.addKeyListener(new MyKeyListener());
+
 
         // 关闭窗口
         addWindowListener(new WindowAdapter() {
@@ -46,6 +54,26 @@ public class TankFrame extends Frame {
         // x += 30;
         // y += 30;
 
+        switch (directionEnums) {
+            case LEFT:
+                x -= SPEED;
+                break;
+
+            case UP:
+                y -= SPEED;
+                break;
+
+            case RIGHT:
+                x += SPEED;
+                break;
+
+            case DOWN:
+                y += SPEED;
+                break;
+
+            default:
+                break;
+        }
 
     }
 
@@ -89,20 +117,11 @@ public class TankFrame extends Frame {
                     break;
             }
 
-            if (bL) {
-                x -= 10;
-            }
-            if (bU) {
-                y -= 10;
-            }
-            if (bR) {
-                x += 10;
-            }
-            if (bD) {
-                y += 10;
-            }
+            //设置tank的方向
+            setTankDirection();
 
         }
+
 
         // 键盘抬起调用
         @Override
@@ -128,6 +147,24 @@ public class TankFrame extends Frame {
 
                 default:
                     break;
+            }
+        }
+
+        /**
+         * 设置tank的方向
+         */
+        private void setTankDirection() {
+            if (bL) {
+                directionEnums = DirectionEnums.LEFT;
+            }
+            if (bU) {
+                directionEnums = DirectionEnums.UP;
+            }
+            if (bR) {
+                directionEnums = DirectionEnums.RIGHT;
+            }
+            if (bD) {
+                directionEnums = DirectionEnums.DOWN;
             }
         }
     }
