@@ -6,6 +6,9 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
+    int x = 200;
+    int y = 200;
+
     public TankFrame(){
         //大小  长和宽
         setSize(800,600);
@@ -31,8 +34,14 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
 
-        //填充一个矩形
-        g.fillRect(200, 200, 50, 50);
+        // 版本2 填充一个矩形
+        //g.fillRect(200, 200, 50, 50);
+
+        //版本3 想让矩形动起来 win + d 算一次重新绘制， 可以看到效果
+        System.out.println("paint");
+        g.fillRect(x, y, 50, 50);
+        x += 30;
+        y += 30;
 
     }
 }
