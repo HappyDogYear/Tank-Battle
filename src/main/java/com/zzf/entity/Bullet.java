@@ -1,50 +1,47 @@
 package com.zzf.entity;
 
 import com.zzf.enums.DirectionEnums;
-import lombok.*;
 
 import java.awt.*;
 
 /**
- * 坦克类
+ * 子弹
  */
-@Setter
-@RequiredArgsConstructor
-public class Tank {
+public class Bullet {
 
-    // tank的位置
+    // 子弹位置
     private int x;
     private int y;
 
-    //tank的方向
+    // 子弹方向
     private DirectionEnums directionEnums;
 
-    //tank的速度
-    private static final int SPEED = 3;
-    //tank是否停止
-    private boolean moving = false;
+    // 子弹宽度和高度
+    private static final int WIDTH = 10;
+    private static final int HEIGHT = 10;
 
-    public Tank(int x, int y, DirectionEnums directionEnums) {
+    // 子弹速度
+    private static final int SPEED = 5;
+
+    public Bullet(int x, int y, DirectionEnums directionEnums) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
     }
 
-
     public void paint(Graphics g) {
-        //绘制
-        g.fillRect(x, y, 50, 50);
+        // 绘制子弹
 
-        //移动
+        Color color = g.getColor();
+        g.setColor(Color.RED);
+        g.fillOval(x, y, WIDTH, HEIGHT);
+        g.setColor(color);
+
+        // 移动
         move();
     }
 
-
-    private void move(){
-        if(!moving){
-            return;
-        }
-
+    private void move() {
         switch (directionEnums) {
             case LEFT:
                 x -= SPEED;

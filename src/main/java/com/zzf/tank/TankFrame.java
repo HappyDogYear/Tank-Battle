@@ -1,5 +1,6 @@
 package com.zzf.tank;
 
+import com.zzf.entity.Bullet;
 import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
 
@@ -9,6 +10,8 @@ import java.awt.event.*;
 public class TankFrame extends Frame {
 
     Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN);
+
+    Bullet bullet = new Bullet(100, 100, DirectionEnums.DOWN);
 
     public TankFrame() {
         // 大小  长和宽
@@ -52,6 +55,9 @@ public class TankFrame extends Frame {
 
         //画出tank
         mainTank.paint(g);
+
+        //画子弹
+        bullet.paint(g);
     }
 
     /**
