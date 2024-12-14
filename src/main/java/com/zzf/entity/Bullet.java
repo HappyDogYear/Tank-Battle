@@ -19,8 +19,8 @@ public class Bullet {
     private DirectionEnums directionEnums;
 
     // 子弹宽度和高度
-    private static final int WIDTH = 10;
-    private static final int HEIGHT = 10;
+    public static final int WIDTH = ImageUtils.bulletD.getWidth();
+    public static final int HEIGHT = ImageUtils.bulletD.getHeight();
 
     // 子弹速度
     private static final int SPEED = 5;

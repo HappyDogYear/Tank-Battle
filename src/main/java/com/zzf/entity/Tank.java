@@ -17,15 +17,18 @@ public class Tank {
     private int x;
     private int y;
 
-    //tank的方向
+    // tank的方向
     private DirectionEnums directionEnums;
 
-    //tank的速度
+    // tank的速度
     private static final int SPEED = 3;
-    //tank是否停止
+    // tank是否停止
     private boolean moving = false;
 
     private TankFrame tankFrame;
+
+    public static final int WIDTH = ImageUtils.tankD.getWidth();
+    public static final int HEIGHT = ImageUtils.tankD.getHeight();
 
     public Tank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame) {
         this.x = x;
@@ -36,14 +39,14 @@ public class Tank {
 
 
     public void paint(Graphics g) {
-        //绘制
+        // 绘制
         // Color color = g.getColor();
         // g.setColor(Color.YELLOW);
         // g.fillRect(x, y, 50, 50);
         // //todo 从测试来看，可以不要
         // g.setColor(color);
 
-        switch (directionEnums){
+        switch (directionEnums) {
             // todo 疑问，此处为什么不能  DirectionEnums.LEFT
             case LEFT:
                 g.drawImage(ImageUtils.tankL, x, y, null);
@@ -61,13 +64,13 @@ public class Tank {
                 break;
         }
 
-        //移动
+        // 移动
         move();
     }
 
 
-    private void move(){
-        if(!moving){
+    private void move() {
+        if (!moving) {
             return;
         }
 
@@ -94,6 +97,10 @@ public class Tank {
     }
 
     public void fire() {
-        tankFrame.bullets.add(new Bullet(this.x, this.y, directionEnums, this.tankFrame));
+        // 这样的话， 子弹都是从tank中心发出
+        int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+
+        tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame));
     }
 }
