@@ -9,13 +9,17 @@ import java.awt.event.*;
 
 public class TankFrame extends Frame {
 
-    Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN);
+    private static final int GAME_WIDTH = 800;
+    private static final int GAME_HEIGHT = 600;
 
+    Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN);
     Bullet bullet = new Bullet(100, 100, DirectionEnums.DOWN);
+
+    Image offScreenImage = null;
 
     public TankFrame() {
         // 大小  长和宽
-        setSize(800, 600);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         // 能否改变大小
         setResizable(false);
 
@@ -58,6 +62,26 @@ public class TankFrame extends Frame {
 
         //画子弹
         bullet.paint(g);
+    }
+
+    /**
+     * 双缓冲 解决闪烁问题
+     * @param g the specified Graphics window
+     */
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null) {
+            offScreenImage = createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color color = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(color);
+        paint(gOffScreen);
+
+        g.drawImage(offScreenImage, 0, 0, null);
     }
 
     /**

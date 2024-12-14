@@ -33,7 +33,11 @@ public class Tank {
 
     public void paint(Graphics g) {
         //绘制
+        Color color = g.getColor();
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 50);
+        //todo 从测试来看，可以不要
+        g.setColor(color);
 
         //移动
         move();
