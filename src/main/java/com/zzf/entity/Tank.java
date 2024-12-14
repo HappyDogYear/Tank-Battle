@@ -11,7 +11,6 @@ import java.awt.*;
  * 坦克类
  */
 @Setter
-@RequiredArgsConstructor
 public class Tank {
 
     // tank的位置
@@ -44,9 +43,23 @@ public class Tank {
         // //todo 从测试来看，可以不要
         // g.setColor(color);
 
-        Color color = g.getColor();
-        g.drawImage(ImageUtils.tankL, x, y, null);
-        g.setColor(color);
+        switch (directionEnums){
+            // todo 疑问，此处为什么不能  DirectionEnums.LEFT
+            case LEFT:
+                g.drawImage(ImageUtils.tankL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ImageUtils.tankU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ImageUtils.tankR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ImageUtils.tankD, x, y, null);
+                break;
+            default:
+                break;
+        }
 
         //移动
         move();

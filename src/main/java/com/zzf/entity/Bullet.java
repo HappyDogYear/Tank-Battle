@@ -2,6 +2,7 @@ package com.zzf.entity;
 
 import com.zzf.enums.DirectionEnums;
 import com.zzf.tank.TankFrame;
+import com.zzf.utils.ImageUtils;
 
 import java.awt.*;
 
@@ -41,11 +42,29 @@ public class Bullet {
             tankFrame.bullets.remove(this);
         }
 
-        // 绘制子弹
-        Color color = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT);
-        g.setColor(color);
+        // // 绘制子弹
+        // Color color = g.getColor();
+        // g.setColor(Color.RED);
+        // g.fillOval(x, y, WIDTH, HEIGHT);
+        // g.setColor(color);
+
+        switch (directionEnums){
+            // todo 疑问，此处为什么不能  DirectionEnums.LEFT
+            case LEFT:
+                g.drawImage(ImageUtils.bulletL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ImageUtils.bulletU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ImageUtils.bulletR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ImageUtils.bulletD, x, y, null);
+                break;
+            default:
+                break;
+        }
 
         // 移动
         move();
