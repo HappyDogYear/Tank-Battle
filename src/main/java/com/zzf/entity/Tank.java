@@ -2,6 +2,7 @@ package com.zzf.entity;
 
 import com.zzf.enums.DirectionEnums;
 import com.zzf.tank.TankFrame;
+import com.zzf.utils.ImageUtils;
 import lombok.*;
 
 import java.awt.*;
@@ -37,10 +38,14 @@ public class Tank {
 
     public void paint(Graphics g) {
         //绘制
+        // Color color = g.getColor();
+        // g.setColor(Color.YELLOW);
+        // g.fillRect(x, y, 50, 50);
+        // //todo 从测试来看，可以不要
+        // g.setColor(color);
+
         Color color = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillRect(x, y, 50, 50);
-        //todo 从测试来看，可以不要
+        g.drawImage(ImageUtils.tankL, x, y, null);
         g.setColor(color);
 
         //移动
