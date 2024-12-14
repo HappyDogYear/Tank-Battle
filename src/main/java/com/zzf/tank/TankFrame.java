@@ -12,8 +12,13 @@ public class TankFrame extends Frame {
     private static final int GAME_WIDTH = 800;
     private static final int GAME_HEIGHT = 600;
 
-    Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN);
-    Bullet bullet = new Bullet(100, 100, DirectionEnums.DOWN);
+    Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN, this);
+
+    /**
+     * 不加 pulic 无法访问属性
+     * 与案例不同的是， 我的两个类在不同的包下， 默认访问是在同一个包的类可以访问
+     */
+    public Bullet bullet = new Bullet(100, 100, DirectionEnums.DOWN);
 
     Image offScreenImage = null;
 
@@ -150,6 +155,10 @@ public class TankFrame extends Frame {
 
                 case KeyEvent.VK_DOWN:
                     bD = false;
+                    break;
+
+                case KeyEvent.VK_CONTROL:
+                    mainTank.fire();
                     break;
 
                 default:

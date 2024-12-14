@@ -1,6 +1,7 @@
 package com.zzf.entity;
 
 import com.zzf.enums.DirectionEnums;
+import com.zzf.tank.TankFrame;
 import lombok.*;
 
 import java.awt.*;
@@ -24,10 +25,13 @@ public class Tank {
     //tank是否停止
     private boolean moving = false;
 
-    public Tank(int x, int y, DirectionEnums directionEnums) {
+    private TankFrame tankFrame;
+
+    public Tank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
+        this.tankFrame = tankFrame;
     }
 
 
@@ -69,5 +73,9 @@ public class Tank {
             default:
                 break;
         }
+    }
+
+    public void fire() {
+        tankFrame.bullet = new Bullet(this.x, this.y, directionEnums);
     }
 }
