@@ -6,19 +6,24 @@ import com.zzf.enums.DirectionEnums;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class TankFrame extends Frame {
 
-    private static final int GAME_WIDTH = 800;
-    private static final int GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 800;
+    public static final int GAME_HEIGHT = 600;
 
     Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN, this);
 
-    /**
-     * 不加 pulic 无法访问属性
-     * 与案例不同的是， 我的两个类在不同的包下， 默认访问是在同一个包的类可以访问
-     */
-    public Bullet bullet = new Bullet(100, 100, DirectionEnums.DOWN);
+    public List<Bullet> bullets = new CopyOnWriteArrayList<>();
+
+    // /**
+    //  * 不加 pulic 无法访问属性
+    //  * 与案例不同的是， 我的两个类在不同的包下， 默认访问是在同一个包的类可以访问
+    //  */
+    // public Bullet bullet = new Bullet(100, 100, DirectionEnums.DOWN);
 
     Image offScreenImage = null;
 
@@ -61,12 +66,28 @@ public class TankFrame extends Frame {
         // x += 30;
         // y += 30;
 
+        Color color = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量：" + bullets.size(), 10, 60);
+        g.setColor(color);
 
         //画出tank
         mainTank.paint(g);
 
         //画子弹
-        bullet.paint(g);
+        // bullet.paint(g);
+
+        // 用普通 ArrayList
+        // 做子弹消失的操作时候， 会产生著名的并发修改异常
+        // 可以使用 CopyOnWriteArrayList 解决  或者直接用普通的fori循环
+        bullets.forEach(x -> {
+            x.paint(g);
+        });
+
+
+        // for (int i = 0; i < bullets.size(); i++) {
+        //     bullets.get(i).paint(g);
+        // }
     }
 
     /**

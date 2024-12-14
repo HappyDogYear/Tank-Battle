@@ -76,6 +76,6 @@ public class Tank {
     }
 
     public void fire() {
-        tankFrame.bullet = new Bullet(this.x, this.y, directionEnums);
+        tankFrame.bullets.add(new Bullet(this.x, this.y, directionEnums, this.tankFrame));
     }
 }
