@@ -1,5 +1,6 @@
 package com.zzf.entity;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
@@ -26,7 +27,7 @@ public class Bullet {
     private static final int SPEED = 5;
 
     //子弹存活状态
-    private boolean live = true;
+    private boolean living = true;
 
     TankFrame tankFrame = null;
 
@@ -38,7 +39,7 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        if(!live){
+        if(!living){
             tankFrame.bullets.remove(this);
         }
 
@@ -93,7 +94,21 @@ public class Bullet {
         }
 
         if( x <0 || y <0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT ){
-            live = false;
+            living = false;
         }
+    }
+
+    public void collideWith(Tank tank) {
+        Rectangle bulletRect = new Rectangle(x, y, WIDTH, HEIGHT);
+        Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+
+        if (bulletRect.intersects(tankRect)) {
+            tank.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+        this.living = Boolean.FALSE;
     }
 }

@@ -5,8 +5,10 @@ import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -15,9 +17,10 @@ public class TankFrame extends Frame {
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
 
-    Tank mainTank = new Tank(200, 200, DirectionEnums.DOWN, this);
+    Tank mainTank = new Tank(200, 400, DirectionEnums.DOWN, this);
 
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
+    public List<Tank> tanks = new CopyOnWriteArrayList<>();
 
     // /**
     //  * 不加 pulic 无法访问属性
@@ -69,10 +72,15 @@ public class TankFrame extends Frame {
         Color color = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量：" + bullets.size(), 10, 60);
+        g.drawString("敌人的数量：" + tanks.size(), 10, 80);
         g.setColor(color);
 
         //画出tank
         mainTank.paint(g);
+
+        tanks.forEach(x -> {
+            x.paint(g);
+        });
 
         //画子弹
         // bullet.paint(g);
@@ -82,6 +90,15 @@ public class TankFrame extends Frame {
         // 可以使用 CopyOnWriteArrayList 解决  或者直接用普通的fori循环
         bullets.forEach(x -> {
             x.paint(g);
+        });
+
+
+        //此时，测试发现一个问题，主坦克在敌方tank的位置上打不出子弹
+        //因为敌方tank挂掉之后，容器没有移除
+        bullets.forEach(b -> {
+            tanks.forEach(t -> {
+                b.collideWith(t);
+            });
         });
 
 

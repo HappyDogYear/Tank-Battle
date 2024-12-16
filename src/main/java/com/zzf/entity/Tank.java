@@ -1,5 +1,6 @@
 package com.zzf.entity;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
@@ -11,6 +12,7 @@ import java.awt.*;
  * 坦克类
  */
 @Setter
+@Getter
 public class Tank {
 
     // tank的位置
@@ -24,6 +26,8 @@ public class Tank {
     private static final int SPEED = 3;
     // tank是否停止
     private boolean moving = false;
+    // tank是否存活
+    private boolean living = true;
 
     private TankFrame tankFrame;
 
@@ -45,6 +49,10 @@ public class Tank {
         // g.fillRect(x, y, 50, 50);
         // //todo 从测试来看，可以不要
         // g.setColor(color);
+
+        if (!living) {
+            tankFrame.tanks.remove(this);
+        }
 
         switch (directionEnums) {
             // todo 疑问，此处为什么不能  DirectionEnums.LEFT
@@ -102,5 +110,9 @@ public class Tank {
         int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
         tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame));
+    }
+
+    public void die() {
+        this.living = Boolean.FALSE;
     }
 }

@@ -1,5 +1,7 @@
 package com.zzf.test;
 
+import com.zzf.entity.Tank;
+import com.zzf.enums.DirectionEnums;
 import com.zzf.tank.TankFrame;
 
 import java.awt.*;
@@ -39,6 +41,11 @@ public class MainTest {
 
     public static void test2() throws InterruptedException {
         TankFrame frame = new TankFrame();
+
+        //初始化敌方tank
+        for (int i = 0; i < 5; i++) {
+            frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame));
+        }
 
         while (true){
             Thread.sleep(50);
