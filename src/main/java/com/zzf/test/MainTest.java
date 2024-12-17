@@ -2,6 +2,7 @@ package com.zzf.test;
 
 import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
+import com.zzf.enums.GroupEnums;
 import com.zzf.tank.TankFrame;
 
 import java.awt.*;
@@ -44,9 +45,10 @@ public class MainTest {
 
         //初始化敌方tank
         for (int i = 0; i < 5; i++) {
-            frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame));
+            frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame, GroupEnums.BAD));
         }
 
+        System.out.println();
         while (true){
             Thread.sleep(50);
             frame.repaint();

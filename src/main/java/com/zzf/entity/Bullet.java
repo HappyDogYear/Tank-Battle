@@ -2,6 +2,7 @@ package com.zzf.entity;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzf.enums.DirectionEnums;
+import com.zzf.enums.GroupEnums;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 
@@ -18,6 +19,7 @@ public class Bullet {
 
     // 子弹方向
     private DirectionEnums directionEnums;
+    private GroupEnums groupEnums;
 
     // 子弹宽度和高度
     public static final int WIDTH = ImageUtils.bulletD.getWidth();
@@ -31,11 +33,12 @@ public class Bullet {
 
     TankFrame tankFrame = null;
 
-    public Bullet(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame) {
+    public Bullet(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame, GroupEnums groupEnums) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
         this.tankFrame = tankFrame;
+        this.groupEnums = groupEnums;
     }
 
     public void paint(Graphics g) {
@@ -99,6 +102,11 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+
+        if(this.groupEnums == tank.getGroupEnums()){
+            return;
+        }
+
         Rectangle bulletRect = new Rectangle(x, y, WIDTH, HEIGHT);
         Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 

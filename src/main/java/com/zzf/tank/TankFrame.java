@@ -3,6 +3,7 @@ package com.zzf.tank;
 import com.zzf.entity.Bullet;
 import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
+import com.zzf.enums.GroupEnums;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -17,7 +18,7 @@ public class TankFrame extends Frame {
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
 
-    Tank mainTank = new Tank(200, 400, DirectionEnums.DOWN, this);
+    Tank mainTank = new Tank(200, 400, DirectionEnums.DOWN, this, GroupEnums.GOOD);
 
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
     public List<Tank> tanks = new CopyOnWriteArrayList<>();

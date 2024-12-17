@@ -2,11 +2,13 @@ package com.zzf.entity;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzf.enums.DirectionEnums;
+import com.zzf.enums.GroupEnums;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 import lombok.*;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 坦克类
@@ -21,24 +23,29 @@ public class Tank {
 
     // tank的方向
     private DirectionEnums directionEnums;
+    //
+    private GroupEnums groupEnums;
 
     // tank的速度
     private static final int SPEED = 3;
     // tank是否停止
-    private boolean moving = false;
+    private boolean moving = true;
     // tank是否存活
     private boolean living = true;
 
     private TankFrame tankFrame;
 
+    private Random random = new Random();
+
     public static final int WIDTH = ImageUtils.tankD.getWidth();
     public static final int HEIGHT = ImageUtils.tankD.getHeight();
 
-    public Tank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame) {
+    public Tank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame, GroupEnums groupEnums) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
         this.tankFrame = tankFrame;
+        this.groupEnums = groupEnums;
     }
 
 
@@ -102,6 +109,13 @@ public class Tank {
             default:
                 break;
         }
+
+        // 目标是让敌方坦克开火  但是现在没有开火 ？
+        // 问题解决， 因为 moving 默认是false move方法不生效
+        // tank要分清敌我，就得有个属性来标记敌我 , 同样子弹也要有
+        if(random.nextInt(10) > 8){
+            this.fire();
+        }
     }
 
     public void fire() {
@@ -109,7 +123,7 @@ public class Tank {
         int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
-        tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame));
+        tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame, this.groupEnums));
     }
 
     public void die() {
