@@ -77,7 +77,9 @@ public class TankFrame extends Frame {
         g.setColor(color);
 
         //画出tank
-        mainTank.paint(g);
+        if(mainTank.isLiving()){
+            mainTank.paint(g);
+        }
 
         tanks.forEach(x -> {
             x.paint(g);
@@ -100,6 +102,10 @@ public class TankFrame extends Frame {
             tanks.forEach(t -> {
                 b.collideWith(t);
             });
+
+            if(b.getGroupEnums() == GroupEnums.BAD) {
+                b.collideWith(mainTank);
+            }
         });
 
 

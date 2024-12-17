@@ -5,12 +5,14 @@ import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
+import lombok.Getter;
 
 import java.awt.*;
 
 /**
  * 子弹
  */
+@Getter
 public class Bullet {
 
     // 子弹位置
