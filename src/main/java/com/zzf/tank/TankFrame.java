@@ -1,6 +1,7 @@
 package com.zzf.tank;
 
 import com.zzf.entity.Bullet;
+import com.zzf.entity.Explode;
 import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
@@ -22,6 +23,8 @@ public class TankFrame extends Frame {
 
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
+
+    Explode e = new Explode(100, 100, this);
 
     // /**
     //  * 不加 pulic 无法访问属性
@@ -107,6 +110,9 @@ public class TankFrame extends Frame {
                 b.collideWith(mainTank);
             }
         });
+
+        //画出爆炸效果
+        e.paint(g);
 
 
         // for (int i = 0; i < bullets.size(); i++) {

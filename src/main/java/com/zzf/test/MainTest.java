@@ -48,7 +48,6 @@ public class MainTest {
             frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame, GroupEnums.BAD));
         }
 
-        System.out.println();
         while (true){
             Thread.sleep(50);
             frame.repaint();
