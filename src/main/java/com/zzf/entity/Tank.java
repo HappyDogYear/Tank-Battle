@@ -127,11 +127,6 @@ public class Tank {
                 break;
         }
 
-        if (x < 0 || y < 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
-            tankFrame.tanks.remove(this);
-            return;
-        }
-
         // 目标是让敌方坦克开火  但是现在没有开火 ？
         // 问题解决， 因为 moving 默认是false move方法不生效
         // tank要分清敌我，就得有个属性来标记敌我 , 同样子弹也要有
@@ -143,6 +138,23 @@ public class Tank {
             randomDirection();
         }
 
+        //边界检测
+        boundsCheck();
+    }
+
+    private void boundsCheck() {
+        if(this.x < 0){
+            x = 2;
+        }
+        if(this.y < 30){
+            y = 30;
+        }
+        if(this.x > TankFrame.GAME_WIDTH - Tank.WIDTH){
+            x = TankFrame.GAME_WIDTH - Tank.WIDTH;
+        }
+        if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT){
+            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
+        }
 
     }
 
