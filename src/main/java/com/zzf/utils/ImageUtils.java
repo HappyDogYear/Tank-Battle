@@ -12,6 +12,11 @@ public class ImageUtils {
     public static BufferedImage tankR;
     public static BufferedImage tankD;
 
+    public static BufferedImage badTankL;
+    public static BufferedImage badTankU;
+    public static BufferedImage badTankR;
+    public static BufferedImage badTankD;
+
     public static BufferedImage bulletL;
     public static BufferedImage bulletU;
     public static BufferedImage bulletR;
@@ -20,10 +25,15 @@ public class ImageUtils {
     public static BufferedImage[] explodes = new BufferedImage[16];
     static {
         try {
-            tankU = ImageIO.read(ImageUtils.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+            tankU = ImageIO.read(ImageUtils.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
             tankL = rotateImage(tankU, -90);
             tankR = rotateImage(tankU, 90);
             tankD = rotateImage(tankU, 180);
+
+            badTankU = ImageIO.read(ImageUtils.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+            badTankL = rotateImage(badTankU, -90);
+            badTankR = rotateImage(badTankU, 90);
+            badTankD = rotateImage(badTankU, 180);
 
             bulletU = ImageIO.read(ImageUtils.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
             bulletL = rotateImage(bulletU, -90);

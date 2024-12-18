@@ -64,16 +64,33 @@ public class Tank {
         switch (directionEnums) {
             // todo 疑问，此处为什么不能  DirectionEnums.LEFT
             case LEFT:
-                g.drawImage(ImageUtils.tankL, x, y, null);
+                if(this.groupEnums == GroupEnums.BAD){
+                    g.drawImage(ImageUtils.badTankL, x, y, null);
+                }else {
+                    g.drawImage(ImageUtils.tankL, x, y, null);
+                }
                 break;
             case UP:
-                g.drawImage(ImageUtils.tankU, x, y, null);
+                if(this.groupEnums == GroupEnums.BAD){
+                    g.drawImage(ImageUtils.badTankU, x, y, null);
+                }else {
+                    g.drawImage(ImageUtils.tankU, x, y, null);
+                }
                 break;
             case RIGHT:
-                g.drawImage(ImageUtils.tankR, x, y, null);
+                if(this.groupEnums == GroupEnums.BAD){
+                    g.drawImage(ImageUtils.badTankR, x, y, null);
+                }else {
+                    g.drawImage(ImageUtils.tankR, x, y, null);
+                }
                 break;
             case DOWN:
-                g.drawImage(ImageUtils.tankD, x, y, null);
+                if(this.groupEnums == GroupEnums.BAD){
+                    g.drawImage(ImageUtils.badTankD, x, y, null);
+                }else {
+                    g.drawImage(ImageUtils.tankD, x, y, null);
+                }
+
                 break;
             default:
                 break;
