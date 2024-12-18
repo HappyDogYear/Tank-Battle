@@ -23,8 +23,7 @@ public class TankFrame extends Frame {
 
     public List<Bullet> bullets = new CopyOnWriteArrayList<>();
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
-
-    Explode e = new Explode(100, 100, this);
+    public List<Explode> explodes = new CopyOnWriteArrayList<>();
 
     // /**
     //  * 不加 pulic 无法访问属性
@@ -77,6 +76,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量：" + bullets.size(), 10, 60);
         g.drawString("敌人的数量：" + tanks.size(), 10, 80);
+        g.drawString("爆炸的数量：" + explodes.size(), 10, 100);
         g.setColor(color);
 
         //画出tank
@@ -98,6 +98,10 @@ public class TankFrame extends Frame {
             x.paint(g);
         });
 
+        explodes.forEach(x -> {
+            x.paint(g);
+        });
+
 
         //此时，测试发现一个问题，主坦克在敌方tank的位置上打不出子弹
         //因为敌方tank挂掉之后，容器没有移除
@@ -111,8 +115,6 @@ public class TankFrame extends Frame {
             }
         });
 
-        //画出爆炸效果
-        e.paint(g);
 
 
         // for (int i = 0; i < bullets.size(); i++) {
