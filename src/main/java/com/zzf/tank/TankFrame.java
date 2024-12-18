@@ -145,7 +145,6 @@ public class TankFrame extends Frame {
      */
     class MyKeyListener extends KeyAdapter {
 
-        // 用于判断方向， 实现同时按左上， 斜着走的功能
         boolean bL = false;
         boolean bU = false;
         boolean bR = false;
@@ -158,27 +157,7 @@ public class TankFrame extends Frame {
             // 会默认调用 paint 方法
             // repaint();
 
-            int keyCode = e.getKeyCode();
-            switch (keyCode) {
-                case KeyEvent.VK_LEFT:
-                    bL = true;
-                    break;
-
-                case KeyEvent.VK_UP:
-                    bU = true;
-                    break;
-
-                case KeyEvent.VK_RIGHT:
-                    bR = true;
-                    break;
-
-                case KeyEvent.VK_DOWN:
-                    bD = true;
-                    break;
-
-                default:
-                    break;
-            }
+            confirmDirAndFire(e, false, false);
 
             // 设置tank的方向
             setTankDirection();
@@ -189,33 +168,7 @@ public class TankFrame extends Frame {
         // 键盘抬起调用
         @Override
         public void keyReleased(KeyEvent e) {
-
-            int keyCode = e.getKeyCode();
-            switch (keyCode) {
-                case KeyEvent.VK_LEFT:
-                    bL = false;
-                    break;
-
-                case KeyEvent.VK_UP:
-                    bU = false;
-                    break;
-
-                case KeyEvent.VK_RIGHT:
-                    bR = false;
-                    break;
-
-                case KeyEvent.VK_DOWN:
-                    bD = false;
-                    break;
-
-                case KeyEvent.VK_CONTROL:
-                    mainTank.fire();
-                    break;
-
-                default:
-                    break;
-            }
-
+            confirmDirAndFire(e, true, true);
             // 设置tank的方向 我觉得加不加不影响后面的操作，到后面再验证
             setTankDirection();
         }
@@ -241,6 +194,38 @@ public class TankFrame extends Frame {
 
             if(!bL && !bU && !bR && !bD) {
                 mainTank.setMoving(Boolean.FALSE);
+            }
+        }
+
+        /**
+         * 确认方向和开火
+         */
+        private void confirmDirAndFire(KeyEvent e, Boolean dirBool, Boolean fireBool){
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    bL = dirBool;
+                    break;
+
+                case KeyEvent.VK_UP:
+                    bU = dirBool;
+                    break;
+
+                case KeyEvent.VK_RIGHT:
+                    bR = dirBool;
+                    break;
+
+                case KeyEvent.VK_DOWN:
+                    bD = dirBool;
+                    break;
+
+                case KeyEvent.VK_CONTROL:
+                    if(fireBool){
+                        mainTank.fire();
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
     }
