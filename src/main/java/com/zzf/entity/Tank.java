@@ -110,12 +110,19 @@ public class Tank {
                 break;
         }
 
+        if(x < 0 || y < 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
+            tankFrame.tanks.remove(this);
+            return;
+        }
+
         // 目标是让敌方坦克开火  但是现在没有开火 ？
         // 问题解决， 因为 moving 默认是false move方法不生效
         // tank要分清敌我，就得有个属性来标记敌我 , 同样子弹也要有
-        if(random.nextInt(10) > 8){
+        if(this.groupEnums == GroupEnums.BAD && random.nextInt(100) > 95){
             this.fire();
         }
+
+        randomDirection();
     }
 
     public void fire() {
@@ -128,5 +135,14 @@ public class Tank {
 
     public void die() {
         this.living = Boolean.FALSE;
+    }
+
+    /**
+     * 随机方向
+     */
+    private void randomDirection() {
+        if(this.groupEnums == GroupEnums.BAD && random.nextInt(1000) > 950){
+            this.directionEnums = DirectionEnums.values()[random.nextInt(4)];
+        }
     }
 }

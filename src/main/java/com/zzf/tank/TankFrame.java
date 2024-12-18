@@ -110,9 +110,9 @@ public class TankFrame extends Frame {
                 b.collideWith(t);
             });
 
-            if(b.getGroupEnums() == GroupEnums.BAD) {
-                b.collideWith(mainTank);
-            }
+            // if(b.getGroupEnums() == GroupEnums.BAD) {
+            //     b.collideWith(mainTank);
+            // }
         });
 
 
