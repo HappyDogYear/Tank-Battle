@@ -31,7 +31,11 @@ public class Explode {
         this.y = y;
         this.tankFrame = tankFrame;
 
-        new Audio("audio/explode.wav").play();
+        // 绘制爆炸效果的时候会出现卡顿的情况
+        // new Audio("audio/explode.wav").play();
+
+        // 使用多线程，解决卡顿情况
+        new Thread(() -> new Audio("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g){
@@ -39,7 +43,7 @@ public class Explode {
         g.drawImage(ImageUtils.explodes[step++], x, y, null);
 
         if(step >= ImageUtils.explodes.length){
-            step = 0;
+            tankFrame.explodes.remove(this);
         }
     }
 }

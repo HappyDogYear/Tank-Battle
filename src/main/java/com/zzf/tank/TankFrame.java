@@ -159,7 +159,7 @@ public class TankFrame extends Frame {
             // 会默认调用 paint 方法
             // repaint();
 
-            confirmDirAndFire(e, false, false);
+            confirmDirAndFire(e, true, false);
 
             // 设置tank的方向
             setTankDirection();
@@ -170,7 +170,7 @@ public class TankFrame extends Frame {
         // 键盘抬起调用
         @Override
         public void keyReleased(KeyEvent e) {
-            confirmDirAndFire(e, true, true);
+            confirmDirAndFire(e, false, true);
             // 设置tank的方向 我觉得加不加不影响后面的操作，到后面再验证
             setTankDirection();
         }
