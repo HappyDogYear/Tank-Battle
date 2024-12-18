@@ -110,7 +110,7 @@ public class Tank {
                 break;
         }
 
-        if(x < 0 || y < 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
+        if (x < 0 || y < 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
             tankFrame.tanks.remove(this);
             return;
         }
@@ -118,17 +118,21 @@ public class Tank {
         // 目标是让敌方坦克开火  但是现在没有开火 ？
         // 问题解决， 因为 moving 默认是false move方法不生效
         // tank要分清敌我，就得有个属性来标记敌我 , 同样子弹也要有
-        if(this.groupEnums == GroupEnums.BAD && random.nextInt(100) > 95){
+        if (this.groupEnums == GroupEnums.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
 
-        randomDirection();
+        if (this.groupEnums == GroupEnums.BAD && random.nextInt(100) > 95) {
+            randomDirection();
+        }
+
+
     }
 
     public void fire() {
         // 这样的话， 子弹都是从tank中心发出
-        int bx = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
-        int by = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
         tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame, this.groupEnums));
     }
@@ -141,8 +145,6 @@ public class Tank {
      * 随机方向
      */
     private void randomDirection() {
-        if(this.groupEnums == GroupEnums.BAD && random.nextInt(1000) > 950){
-            this.directionEnums = DirectionEnums.values()[random.nextInt(4)];
-        }
+        this.directionEnums = DirectionEnums.values()[random.nextInt(4)];
     }
 }
