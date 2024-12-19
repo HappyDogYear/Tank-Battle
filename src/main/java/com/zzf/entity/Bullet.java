@@ -35,12 +35,19 @@ public class Bullet {
 
     TankFrame tankFrame = null;
 
+    Rectangle rect = new Rectangle();
+
     public Bullet(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame, GroupEnums groupEnums) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
         this.tankFrame = tankFrame;
         this.groupEnums = groupEnums;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -98,6 +105,9 @@ public class Bullet {
                 break;
         }
 
+        rect.x = x;
+        rect.y = y;
+
         if( x <0 || y <0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT ){
             living = false;
         }
@@ -109,10 +119,11 @@ public class Bullet {
             return;
         }
 
-        Rectangle bulletRect = new Rectangle(x, y, WIDTH, HEIGHT);
-        Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        // 多次new 会产生很多垃圾碎片，垃圾回收器执行频率也高
+        // Rectangle bulletRect = new Rectangle(x, y, WIDTH, HEIGHT);
+        // Rectangle tankRect = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
 
-        if (bulletRect.intersects(tankRect)) {
+        if (this.rect.intersects(tank.rect)) {
             tank.die();
             this.die();
 

@@ -38,6 +38,8 @@ public class Tank {
 
     private Random random = new Random();
 
+    Rectangle rect = new Rectangle();
+
     public static final int WIDTH = ImageUtils.tankD.getWidth();
     public static final int HEIGHT = ImageUtils.tankD.getHeight();
 
@@ -47,6 +49,11 @@ public class Tank {
         this.directionEnums = directionEnums;
         this.tankFrame = tankFrame;
         this.groupEnums = groupEnums;
+
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
 
@@ -123,6 +130,9 @@ public class Tank {
 
         //边界检测
         boundsCheck();
+
+        rect.x = x;
+        rect.y = y;
     }
 
     private void boundsCheck() {
