@@ -4,6 +4,7 @@ import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
 import com.zzf.tank.TankFrame;
+import com.zzf.utils.ConfigUtils;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -43,8 +44,9 @@ public class MainTest {
     public static void test2() throws InterruptedException {
         TankFrame frame = new TankFrame();
 
+        int enemyTankNums = Integer.parseInt((String) ConfigUtils.getKey("enemyTankNums"));
         //初始化敌方tank
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < enemyTankNums; i++) {
             frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame, GroupEnums.BAD));
         }
 
