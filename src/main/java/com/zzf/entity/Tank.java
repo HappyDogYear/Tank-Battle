@@ -8,6 +8,7 @@ import com.zzf.utils.ImageUtils;
 import lombok.*;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Random;
 @Getter
 public class Tank {
 
-    // tank的位置
+    // tank的位置  xy是tank的左上角
     private int x;
     private int y;
 
@@ -61,40 +62,22 @@ public class Tank {
             tankFrame.tanks.remove(this);
         }
 
+        BufferedImage image = null;
         switch (directionEnums) {
-            // todo 疑问，此处为什么不能  DirectionEnums.LEFT
             case LEFT:
-                if(this.groupEnums == GroupEnums.BAD){
-                    g.drawImage(ImageUtils.badTankL, x, y, null);
-                }else {
-                    g.drawImage(ImageUtils.tankL, x, y, null);
-                }
+                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankL : ImageUtils.badTankL;
                 break;
             case UP:
-                if(this.groupEnums == GroupEnums.BAD){
-                    g.drawImage(ImageUtils.badTankU, x, y, null);
-                }else {
-                    g.drawImage(ImageUtils.tankU, x, y, null);
-                }
+                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankU : ImageUtils.badTankU;
                 break;
             case RIGHT:
-                if(this.groupEnums == GroupEnums.BAD){
-                    g.drawImage(ImageUtils.badTankR, x, y, null);
-                }else {
-                    g.drawImage(ImageUtils.tankR, x, y, null);
-                }
+                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankR : ImageUtils.badTankR;
                 break;
             case DOWN:
-                if(this.groupEnums == GroupEnums.BAD){
-                    g.drawImage(ImageUtils.badTankD, x, y, null);
-                }else {
-                    g.drawImage(ImageUtils.tankD, x, y, null);
-                }
-
-                break;
-            default:
+                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankD : ImageUtils.badTankD;
                 break;
         }
+        g.drawImage(image, x, y, null);
 
         // 移动
         move();
@@ -130,11 +113,11 @@ public class Tank {
         // 目标是让敌方坦克开火  但是现在没有开火 ？
         // 问题解决， 因为 moving 默认是false move方法不生效
         // tank要分清敌我，就得有个属性来标记敌我 , 同样子弹也要有
-        if (this.groupEnums == GroupEnums.BAD && random.nextInt(100) > 95) {
+        if (!GroupEnums.isGood(this.groupEnums) && random.nextInt(100) > 95) {
             this.fire();
         }
 
-        if (this.groupEnums == GroupEnums.BAD && random.nextInt(100) > 95) {
+        if (!GroupEnums.isGood(this.groupEnums) && random.nextInt(100) > 95) {
             randomDirection();
         }
 
