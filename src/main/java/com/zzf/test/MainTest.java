@@ -1,5 +1,6 @@
 package com.zzf.test;
 
+import com.zzf.entity.Audio;
 import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
@@ -49,6 +50,9 @@ public class MainTest {
         for (int i = 0; i < enemyTankNums; i++) {
             frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame, GroupEnums.BAD));
         }
+
+        //加入游戏背景音效
+        new Thread(() -> new Audio("audio/war1.wav").loop()).start();
 
         while (true){
             Thread.sleep(50);

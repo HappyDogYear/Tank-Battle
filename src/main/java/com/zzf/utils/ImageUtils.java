@@ -35,7 +35,7 @@ public class ImageUtils {
             badTankR = rotateImage(badTankU, 90);
             badTankD = rotateImage(badTankU, 180);
 
-            bulletU = ImageIO.read(ImageUtils.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            bulletU = ImageIO.read(ImageUtils.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
             bulletL = rotateImage(bulletU, -90);
             bulletR = rotateImage(bulletU, 90);
             bulletD = rotateImage(bulletU, 180);
