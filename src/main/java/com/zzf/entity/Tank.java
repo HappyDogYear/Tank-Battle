@@ -1,8 +1,10 @@
 package com.zzf.entity;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
+import com.zzf.strategy.DefaultStrategy;
+import com.zzf.strategy.FireStrategy;
+import com.zzf.strategy.FourStrategy;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 import lombok.*;
@@ -40,6 +42,8 @@ public class Tank {
 
     Rectangle rect = new Rectangle();
 
+    FireStrategy def;
+
     public static final int WIDTH = ImageUtils.tankD.getWidth();
     public static final int HEIGHT = ImageUtils.tankD.getHeight();
 
@@ -54,6 +58,9 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        //开火策略 我方tank单发，敌方tank四个方向都发射
+        def = GroupEnums.isGood(this.groupEnums) ? new DefaultStrategy() : new FourStrategy();
     }
 
 
@@ -128,7 +135,7 @@ public class Tank {
             randomDirection();
         }
 
-        //边界检测
+        // 边界检测
         boundsCheck();
 
         rect.x = x;
@@ -136,27 +143,28 @@ public class Tank {
     }
 
     private void boundsCheck() {
-        if(this.x < 0){
+        if (this.x < 2) {
             x = 2;
         }
-        if(this.y < 30){
-            y = 30;
+        if (this.y < 28) {
+            y = 28;
         }
-        if(this.x > TankFrame.GAME_WIDTH - Tank.WIDTH){
-            x = TankFrame.GAME_WIDTH - Tank.WIDTH;
+        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) {
+            x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
         }
-        if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT){
-            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) {
+            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
         }
 
     }
 
     public void fire() {
         // 这样的话， 子弹都是从tank中心发出
-        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        // int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+        // int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        // tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame, this.groupEnums));
 
-        tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame, this.groupEnums));
+        def.fire(this);
     }
 
     public void die() {

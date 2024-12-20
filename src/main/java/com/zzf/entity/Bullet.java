@@ -28,7 +28,7 @@ public class Bullet {
     public static final int HEIGHT = ImageUtils.bulletD.getHeight();
 
     // 子弹速度
-    private static final int SPEED = 5;
+    private static final int SPEED = 10;
 
     //子弹存活状态
     private boolean living = true;
@@ -48,6 +48,9 @@ public class Bullet {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        //实例化完子弹，直接就放入集合
+        tankFrame.bullets.add(this);
     }
 
     public void paint(Graphics g) {
