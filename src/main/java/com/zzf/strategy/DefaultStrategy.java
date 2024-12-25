@@ -6,12 +6,13 @@ import com.zzf.entity.Tank;
 /**
  * 默认开火策略
  */
-public class DefaultStrategy implements FireStrategy{
+public class DefaultStrategy implements FireStrategy {
     @Override
     public void fire(Tank tank) {
         int bx = tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
-        new Bullet(bx, by, tank.getDirectionEnums(), tank.getTankFrame(), tank.getGroupEnums());
+        // new Bullet(bx, by, tank.getDirectionEnums(), tank.getTankFrame(), tank.getGroupEnums());
+        tank.getTankFrame().gameFactory.createBullet(bx, by, tank.getDirectionEnums(), tank.getGroupEnums(), tank.getTankFrame());
     }
 }

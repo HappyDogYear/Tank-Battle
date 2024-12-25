@@ -1,10 +1,9 @@
 package com.zzf.tank;
 
-import com.zzf.entity.Bullet;
-import com.zzf.entity.Explode;
-import com.zzf.entity.Tank;
+import com.zzf.entity.*;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
+import com.zzf.factory.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -21,9 +20,12 @@ public class TankFrame extends Frame {
 
     Tank mainTank = new Tank(200, 400, DirectionEnums.DOWN, this, GroupEnums.GOOD);
 
-    public List<Bullet> bullets = new CopyOnWriteArrayList<>();
+    public List<BaseBullet> bullets = new CopyOnWriteArrayList<>();
     public List<Tank> tanks = new CopyOnWriteArrayList<>();
-    public List<Explode> explodes = new CopyOnWriteArrayList<>();
+    // public List<Explode> explodes = new CopyOnWriteArrayList<>();
+    public List<BaseExplode> explodes = new CopyOnWriteArrayList<>();
+
+    public GameFactory gameFactory = new RectExplodeFactory();
 
     // /**
     //  * 不加 pulic 无法访问属性

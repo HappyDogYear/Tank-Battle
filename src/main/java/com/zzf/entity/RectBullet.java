@@ -13,7 +13,7 @@ import java.awt.*;
  * 子弹
  */
 @Getter
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
 
     // 子弹位置
     private int x;
@@ -37,7 +37,7 @@ public class Bullet extends BaseBullet {
 
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, DirectionEnums directionEnums, GroupEnums groupEnums, TankFrame tankFrame) {
+    public RectBullet(int x, int y, DirectionEnums directionEnums, GroupEnums groupEnums, TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
@@ -65,23 +65,28 @@ public class Bullet extends BaseBullet {
         // g.fillOval(x, y, WIDTH, HEIGHT);
         // g.setColor(color);
 
-        switch (directionEnums){
-            // todo 疑问，此处为什么不能  DirectionEnums.LEFT
-            case LEFT:
-                g.drawImage(ImageUtils.bulletL, x, y, null);
-                break;
-            case UP:
-                g.drawImage(ImageUtils.bulletU, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ImageUtils.bulletR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ImageUtils.bulletD, x, y, null);
-                break;
-            default:
-                break;
-        }
+        // switch (directionEnums){
+        //     // todo 疑问，此处为什么不能  DirectionEnums.LEFT
+        //     case LEFT:
+        //         g.drawImage(ImageUtils.bulletL, x, y, null);
+        //         break;
+        //     case UP:
+        //         g.drawImage(ImageUtils.bulletU, x, y, null);
+        //         break;
+        //     case RIGHT:
+        //         g.drawImage(ImageUtils.bulletR, x, y, null);
+        //         break;
+        //     case DOWN:
+        //         g.drawImage(ImageUtils.bulletD, x, y, null);
+        //         break;
+        //     default:
+        //         break;
+        // }
+
+        Color color = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillOval(x, y, 20, 20);
+        g.setColor(color);
 
         // 移动
         move();
@@ -117,7 +122,6 @@ public class Bullet extends BaseBullet {
         }
     }
 
-    @Override
     public void collideWith(Tank tank) {
 
         if(this.groupEnums == tank.getGroupEnums()){

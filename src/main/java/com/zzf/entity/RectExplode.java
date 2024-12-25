@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * 爆炸类
  */
-public class Explode extends BaseExplode {
+public class RectExplode extends BaseExplode {
 
     public static int WIDTH = ImageUtils.explodes[0].getWidth();
     public static int HEIGHT = ImageUtils.explodes[0].getHeight();
@@ -26,7 +26,7 @@ public class Explode extends BaseExplode {
     private int step = 0;
 
 
-    public Explode(int x, int y, TankFrame tankFrame){
+    public RectExplode(int x, int y, TankFrame tankFrame){
         this.x = x;
         this.y = y;
         this.tankFrame = tankFrame;
@@ -41,10 +41,15 @@ public class Explode extends BaseExplode {
     @Override
     public void paint(Graphics g){
 
-        g.drawImage(ImageUtils.explodes[step++], x, y, null);
+        Color color = g.getColor();
+        g.setColor(Color.RED);
+        g.fillRect(x, y, 10, 10);
+        // step++;
 
-        if(step >= ImageUtils.explodes.length){
+        // if(step >= 10){
             tankFrame.explodes.remove(this);
-        }
+        // }
+
+        g.setColor(color);
     }
 }
