@@ -1,2 +1,8 @@
 age=24
 enemyTankNums=6
+initTankCount=100
+
+
+#开火策略
+godFS=com.zzf.strategy.impl.FourStrategy
+badFS=com.zzf.strategy.impl.DefaultStrategy

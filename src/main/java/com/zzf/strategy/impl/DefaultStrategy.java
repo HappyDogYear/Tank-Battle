@@ -1,7 +1,8 @@
-package com.zzf.strategy;
+package com.zzf.strategy.impl;
 
 import com.zzf.entity.Bullet;
 import com.zzf.entity.Tank;
+import com.zzf.strategy.FireStrategy;
 
 /**
  * 默认开火策略

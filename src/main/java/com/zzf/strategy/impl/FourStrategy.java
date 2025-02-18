@@ -1,8 +1,9 @@
-package com.zzf.strategy;
+package com.zzf.strategy.impl;
 
 import com.zzf.entity.Bullet;
 import com.zzf.entity.Tank;
 import com.zzf.enums.DirectionEnums;
+import com.zzf.strategy.FireStrategy;
 
 public class FourStrategy implements FireStrategy {
     @Override

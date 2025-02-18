@@ -1,10 +1,11 @@
 package com.zzf.entity;
 
+import com.zzf.config.PropertyManger;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
-import com.zzf.strategy.DefaultStrategy;
+import com.zzf.strategy.impl.DefaultStrategy;
 import com.zzf.strategy.FireStrategy;
-import com.zzf.strategy.FourStrategy;
+import com.zzf.strategy.impl.FourStrategy;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 import lombok.*;
@@ -60,7 +61,20 @@ public class Tank {
         rect.height = HEIGHT;
 
         //开火策略 我方tank单发，敌方tank四个方向都发射
-        def = GroupEnums.isGood(this.groupEnums) ? new DefaultStrategy() : new FourStrategy();
+        // def = GroupEnums.isGood(this.groupEnums) ? new DefaultStrategy() : new FourStrategy();
+
+        String strategyName = "";
+        if(GroupEnums.isGood(this.groupEnums)){
+            strategyName = (String) PropertyManger.get("godFS");
+        }else {
+            strategyName = (String) PropertyManger.get("badFS");
+        }
+
+        try {
+            def = (FireStrategy) Class.forName(strategyName).getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
