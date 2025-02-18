@@ -4,5 +4,5 @@ initTankCount=100
 
 
 #开火策略
-godFS=com.zzf.strategy.impl.FourStrategy
-badFS=com.zzf.strategy.impl.DefaultStrategy
+godFS=com.zzf.strategy.impl.DefaultStrategy
+badFS=com.zzf.strategy.impl.FourStrategy

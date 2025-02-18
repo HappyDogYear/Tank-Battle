@@ -21,11 +21,11 @@ public class TankFrame extends Frame {
     Tank mainTank = new Tank(200, 400, DirectionEnums.DOWN, this, GroupEnums.GOOD);
 
     public List<BaseBullet> bullets = new CopyOnWriteArrayList<>();
-    public List<Tank> tanks = new CopyOnWriteArrayList<>();
-    // public List<Explode> explodes = new CopyOnWriteArrayList<>();
+    public List<BaseTank> tanks = new CopyOnWriteArrayList<>();
     public List<BaseExplode> explodes = new CopyOnWriteArrayList<>();
 
-    public GameFactory gameFactory = new RectExplodeFactory();
+    // public GameFactory gameFactory = new RectExplodeFactory();
+    public GameFactory gameFactory = new DefaultFactory();
 
     // /**
     //  * 不加 pulic 无法访问属性

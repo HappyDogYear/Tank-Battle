@@ -4,12 +4,11 @@ import com.zzf.config.PropertyManger;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
 import com.zzf.factory.BaseTank;
-import com.zzf.strategy.impl.DefaultStrategy;
 import com.zzf.strategy.FireStrategy;
-import com.zzf.strategy.impl.FourStrategy;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -20,7 +19,7 @@ import java.util.Random;
  */
 @Setter
 @Getter
-public class Tank extends BaseTank {
+public class RectTank extends BaseTank {
 
     // tank的位置  xy是tank的左上角
     private int x;
@@ -28,6 +27,7 @@ public class Tank extends BaseTank {
 
     // tank的方向
     private DirectionEnums directionEnums;
+
 
     // tank的速度
     private static final int SPEED = 3;
@@ -45,7 +45,7 @@ public class Tank extends BaseTank {
     public static final int WIDTH = ImageUtils.tankD.getWidth();
     public static final int HEIGHT = ImageUtils.tankD.getHeight();
 
-    public Tank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame, GroupEnums groupEnums) {
+    public RectTank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame, GroupEnums groupEnums) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
@@ -87,22 +87,27 @@ public class Tank extends BaseTank {
             tankFrame.tanks.remove(this);
         }
 
-        BufferedImage image = null;
-        switch (directionEnums) {
-            case LEFT:
-                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankL : ImageUtils.badTankL;
-                break;
-            case UP:
-                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankU : ImageUtils.badTankU;
-                break;
-            case RIGHT:
-                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankR : ImageUtils.badTankR;
-                break;
-            case DOWN:
-                image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankD : ImageUtils.badTankD;
-                break;
-        }
-        g.drawImage(image, x, y, null);
+        // BufferedImage image = null;
+        // switch (directionEnums) {
+        //     case LEFT:
+        //         image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankL : ImageUtils.badTankL;
+        //         break;
+        //     case UP:
+        //         image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankU : ImageUtils.badTankU;
+        //         break;
+        //     case RIGHT:
+        //         image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankR : ImageUtils.badTankR;
+        //         break;
+        //     case DOWN:
+        //         image = GroupEnums.isGood(this.groupEnums) ? ImageUtils.tankD : ImageUtils.badTankD;
+        //         break;
+        // }
+        // g.drawImage(image, x, y, null);
+
+        Color color = g.getColor();
+        g.setColor(GroupEnums.isGood(this.groupEnums) ? Color.BLUE : Color.YELLOW);
+        g.fillRect(x, y, 40, 40);
+        g.setColor(color);
 
         // 移动
         move();
@@ -160,11 +165,11 @@ public class Tank extends BaseTank {
         if (this.y < 28) {
             y = 28;
         }
-        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) {
-            x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
+        if (this.x > TankFrame.GAME_WIDTH - RectTank.WIDTH - 2) {
+            x = TankFrame.GAME_WIDTH - RectTank.WIDTH - 2;
         }
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) {
-            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2) {
+            y = TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2;
         }
 
     }
@@ -175,8 +180,9 @@ public class Tank extends BaseTank {
         // int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         // tankFrame.bullets.add(new Bullet(bx, by, directionEnums, this.tankFrame, this.groupEnums));
 
-        // 去掉策略模式
         // def.fire(this);
+
+
         int bx = this.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = this.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 

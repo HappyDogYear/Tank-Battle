@@ -8,5 +8,5 @@ public abstract class BaseBullet {
 
     public abstract void paint(Graphics g);
 
-    public abstract void collideWith(Tank t);
+    public abstract void collideWith(BaseTank t);
 }

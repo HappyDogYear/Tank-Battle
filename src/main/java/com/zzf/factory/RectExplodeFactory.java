@@ -8,7 +8,7 @@ import com.zzf.tank.TankFrame;
 public class RectExplodeFactory extends GameFactory {
     @Override
     public BaseTank createTank(int x, int y, DirectionEnums directionEnums, GroupEnums groupEnums, TankFrame tankFrame) {
-        return null;
+        return new RectTank(x, y, directionEnums, tankFrame, groupEnums);
     }
 
     @Override

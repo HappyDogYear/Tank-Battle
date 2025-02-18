@@ -3,6 +3,7 @@ package com.zzf.entity;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
 import com.zzf.factory.BaseBullet;
+import com.zzf.factory.BaseTank;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 import lombok.Getter;
@@ -118,9 +119,9 @@ public class Bullet extends BaseBullet {
     }
 
     @Override
-    public void collideWith(Tank tank) {
+    public void collideWith(BaseTank tank) {
 
-        if(this.groupEnums == tank.getGroupEnums()){
+        if(this.groupEnums == tank.getGroup()){
             return;
         }
 

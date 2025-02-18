@@ -44,11 +44,11 @@ public class RectExplode extends BaseExplode {
         Color color = g.getColor();
         g.setColor(Color.RED);
         g.fillRect(x, y, 10, 10);
-        // step++;
+        step++;
 
-        // if(step >= 10){
+        if(step >= 10){
             tankFrame.explodes.remove(this);
-        // }
+        }
 
         g.setColor(color);
     }

@@ -12,7 +12,7 @@ public class FourStrategy implements FireStrategy {
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
         for (DirectionEnums value : DirectionEnums.values()) {
-            new Bullet(bx, by, value, tank.getGroupEnums(), tank.getTankFrame());
+            new Bullet(bx, by, value, tank.getGroup(), tank.getTankFrame());
         }
     }
 }
