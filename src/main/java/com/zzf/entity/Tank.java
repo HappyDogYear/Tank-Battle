@@ -3,6 +3,8 @@ package com.zzf.entity;
 import com.zzf.config.PropertyManger;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
+import com.zzf.factory.BaseTank;
+import com.zzf.model.GameModel;
 import com.zzf.strategy.impl.DefaultStrategy;
 import com.zzf.strategy.FireStrategy;
 import com.zzf.strategy.impl.FourStrategy;
@@ -19,7 +21,7 @@ import java.util.Random;
  */
 @Setter
 @Getter
-public class Tank {
+public class Tank extends BaseTank {
 
     // tank的位置  xy是tank的左上角
     private int x;
@@ -37,22 +39,22 @@ public class Tank {
     // tank是否存活
     private boolean living = true;
 
-    private TankFrame tankFrame;
-
     private Random random = new Random();
 
     Rectangle rect = new Rectangle();
 
     FireStrategy def;
 
+    GameModel gm;
+
     public static final int WIDTH = ImageUtils.tankD.getWidth();
     public static final int HEIGHT = ImageUtils.tankD.getHeight();
 
-    public Tank(int x, int y, DirectionEnums directionEnums, TankFrame tankFrame, GroupEnums groupEnums) {
+    public Tank(int x, int y, DirectionEnums directionEnums, GameModel gm, GroupEnums groupEnums) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         this.groupEnums = groupEnums;
 
         rect.x = this.x;
@@ -87,7 +89,7 @@ public class Tank {
         // g.setColor(color);
 
         if (!living) {
-            tankFrame.tanks.remove(this);
+            gm.tanks.remove(this);
         }
 
         BufferedImage image = null;

@@ -3,6 +3,7 @@ package com.zzf.entity;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
 import com.zzf.factory.BaseBullet;
+import com.zzf.model.GameModel;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 import lombok.Getter;
@@ -33,15 +34,15 @@ public class Bullet extends BaseBullet {
     //子弹存活状态
     private boolean living = true;
 
-    TankFrame tankFrame = null;
+    GameModel gm = null;
 
     Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, DirectionEnums directionEnums, GroupEnums groupEnums, TankFrame tankFrame) {
+    public Bullet(int x, int y, DirectionEnums directionEnums, GroupEnums groupEnums, GameModel gm) {
         this.x = x;
         this.y = y;
         this.directionEnums = directionEnums;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
         this.groupEnums = groupEnums;
 
         rect.x = this.x;
@@ -50,13 +51,13 @@ public class Bullet extends BaseBullet {
         rect.height = HEIGHT;
 
         //实例化完子弹，直接就放入集合
-        tankFrame.bullets.add(this);
+        gm.bullets.add(this);
     }
 
     @Override
     public void paint(Graphics g) {
         if(!living){
-            tankFrame.bullets.remove(this);
+            gm.bullets.remove(this);
         }
 
         // // 绘制子弹
@@ -136,7 +137,7 @@ public class Bullet extends BaseBullet {
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
             // tankFrame.explodes.add(new Explode(ex, ey, tankFrame));
-            tankFrame.explodes.add(tankFrame.gameFactory.createExplode(ex, ey, tankFrame));
+            gm.explodes.add(gm.gameFactory.createExplode(ex, ey, gm));
         }
     }
 

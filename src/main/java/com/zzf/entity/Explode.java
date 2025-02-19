@@ -1,6 +1,7 @@
 package com.zzf.entity;
 
 import com.zzf.factory.BaseExplode;
+import com.zzf.model.GameModel;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
 
@@ -21,15 +22,15 @@ public class Explode extends BaseExplode {
     //是否存活
     private boolean living = true;
 
-    TankFrame tankFrame = null;
-
     private int step = 0;
 
+    GameModel gm = null;
 
-    public Explode(int x, int y, TankFrame tankFrame){
+
+    public Explode(int x, int y, GameModel gm){
         this.x = x;
         this.y = y;
-        this.tankFrame = tankFrame;
+        this.gm = gm;
 
         // 绘制爆炸效果的时候会出现卡顿的情况
         // new Audio("audio/explode.wav").play();
@@ -44,7 +45,7 @@ public class Explode extends BaseExplode {
         g.drawImage(ImageUtils.explodes[step++], x, y, null);
 
         if(step >= ImageUtils.explodes.length){
-            tankFrame.explodes.remove(this);
+            gm.explodes.remove(this);
         }
     }
 }

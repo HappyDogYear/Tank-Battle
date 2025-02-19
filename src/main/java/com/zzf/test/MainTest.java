@@ -45,12 +45,6 @@ public class MainTest {
     public static void test2() throws InterruptedException {
         TankFrame frame = new TankFrame();
 
-        int enemyTankNums = Integer.parseInt((String) ConfigUtils.getKey("enemyTankNums"));
-        //初始化敌方tank
-        for (int i = 0; i < enemyTankNums; i++) {
-            frame.tanks.add(new Tank(50+i*80, 200, DirectionEnums.DOWN, frame, GroupEnums.BAD));
-        }
-
         //加入游戏背景音效
         new Thread(() -> new Audio("audio/war1.wav").loop()).start();
 
