@@ -1,6 +1,5 @@
 package com.zzf.entity;
 
-import com.zzf.factory.BaseExplode;
 import com.zzf.model.GameModel;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
@@ -10,7 +9,7 @@ import java.awt.*;
 /**
  * 爆炸类
  */
-public class Explode extends BaseExplode {
+public class Explode extends GameObject {
 
     public static int WIDTH = ImageUtils.explodes[0].getWidth();
     public static int HEIGHT = ImageUtils.explodes[0].getHeight();
@@ -45,7 +44,7 @@ public class Explode extends BaseExplode {
         g.drawImage(ImageUtils.explodes[step++], x, y, null);
 
         if(step >= ImageUtils.explodes.length){
-            gm.explodes.remove(this);
+            gm.remove(this);
         }
     }
 }

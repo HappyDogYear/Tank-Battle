@@ -3,7 +3,6 @@ package com.zzf.entity;
 import com.zzf.config.PropertyManger;
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
-import com.zzf.factory.BaseTank;
 import com.zzf.model.GameModel;
 import com.zzf.strategy.impl.DefaultStrategy;
 import com.zzf.strategy.FireStrategy;
@@ -21,7 +20,7 @@ import java.util.Random;
  */
 @Setter
 @Getter
-public class Tank extends BaseTank {
+public class Tank extends GameObject {
 
     // tank的位置  xy是tank的左上角
     private int x;
@@ -89,7 +88,7 @@ public class Tank extends BaseTank {
         // g.setColor(color);
 
         if (!living) {
-            gm.tanks.remove(this);
+            gm.remove(this);
         }
 
         BufferedImage image = null;
@@ -192,5 +191,9 @@ public class Tank extends BaseTank {
      */
     private void randomDirection() {
         this.directionEnums = DirectionEnums.values()[random.nextInt(4)];
+    }
+
+    public void stop(){
+        this.moving = false;
     }
 }

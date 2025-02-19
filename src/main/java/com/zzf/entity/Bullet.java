@@ -2,7 +2,6 @@ package com.zzf.entity;
 
 import com.zzf.enums.DirectionEnums;
 import com.zzf.enums.GroupEnums;
-import com.zzf.factory.BaseBullet;
 import com.zzf.model.GameModel;
 import com.zzf.tank.TankFrame;
 import com.zzf.utils.ImageUtils;
@@ -14,7 +13,7 @@ import java.awt.*;
  * 子弹
  */
 @Getter
-public class Bullet extends BaseBullet {
+public class Bullet extends GameObject{
 
     // 子弹位置
     private int x;
@@ -51,13 +50,13 @@ public class Bullet extends BaseBullet {
         rect.height = HEIGHT;
 
         //实例化完子弹，直接就放入集合
-        gm.bullets.add(this);
+        gm.add(this);
     }
 
     @Override
     public void paint(Graphics g) {
         if(!living){
-            gm.bullets.remove(this);
+            gm.remove(this);
         }
 
         // // 绘制子弹
@@ -118,7 +117,10 @@ public class Bullet extends BaseBullet {
         }
     }
 
-    @Override
+    /**
+     * 碰撞检测
+     * @param tank
+     */
     public void collideWith(Tank tank) {
 
         if(this.groupEnums == tank.getGroupEnums()){
@@ -137,11 +139,11 @@ public class Bullet extends BaseBullet {
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
             // tankFrame.explodes.add(new Explode(ex, ey, tankFrame));
-            gm.explodes.add(gm.gameFactory.createExplode(ex, ey, gm));
+            gm.add(new Explode(ex, ey, gm));
         }
     }
 
-    private void die() {
+    public void die() {
         this.living = Boolean.FALSE;
     }
 }

@@ -13,7 +13,6 @@ public class DefaultStrategy implements FireStrategy {
         int bx = tank.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
-        // new Bullet(bx, by, tank.getDirectionEnums(), tank.getTankFrame(), tank.getGroupEnums());
-        tank.getGm().gameFactory.createBullet(bx, by, tank.getDirectionEnums(), tank.getGroupEnums(), tank.getGm());
+        new Bullet(bx, by, tank.getDirectionEnums(), tank.getGroupEnums(), tank.getGm());
     }
 }
